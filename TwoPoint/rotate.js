@@ -20,12 +20,14 @@ rotate 1 steps to the right: [99,-1,-100,3]
 rotate 2 steps to the right: [3,99,-1,-100]
  */
 
+//option 1
 var rotate = (nums, k) => {
   nums.unshift(...nums.splice(nums.length-k,k));
   return nums
 
 }
 
+//Option 2
 var rotate = (nums, k) => {
   let i = 0;
   while (i < k) {
@@ -34,4 +36,23 @@ var rotate = (nums, k) => {
   }
   return nums
 }
+
+//option 3  note: (i + k) % nums.length when k > nums.length
+var rotate = (nums, k) => {
+  if( k == 0) return;
+  if (nums == null || nums.length == 0) return;
+  let result  = [];
+  for( let i = 0; i < nums.length; i++) {
+      let idx = (i + k) % nums.length;
+      result[idx] = nums[i];
+  }
+
+  //assign back to original array
+  for( let i = 0; i < nums.length; i++){
+      nums[i] =result[i];
+  }
+  return nums
+}
+
 module.exports = rotate;
+
